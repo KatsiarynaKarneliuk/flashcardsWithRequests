@@ -5,7 +5,7 @@ import { Context } from '../../context';
 
 
 
-const Slider = ({ data }) => {
+const Slider = () => {
     const context = useContext(Context);
     const [position, setPosition] = useState(0);
 
@@ -16,7 +16,7 @@ const Slider = ({ data }) => {
     };
 
     const showNextHandler = () => {
-        if (position < data.length - 1) {
+        if (position < context.length - 1) {
             setPosition(position + 1);
             console.log(position)
         }
@@ -32,8 +32,8 @@ const Slider = ({ data }) => {
                 onShowNext={showNextHandler}
                 number={position + 1}
                 position={position}
-                data={context}
-                dataLength={data.length}
+                context={context}
+                dataLength={context.length}
             />
         </div>
     )

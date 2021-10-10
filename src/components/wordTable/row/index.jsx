@@ -7,7 +7,7 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
 
     const [editable, setEditable] = useState(false);
     const [isLoadingForDelete, setIsLoadingForDelete] = useState(true);
-    const [isDisabled, setIsDisabled] = useState(false)
+    const [isDisabledDelete, setIsDisabledDelete] = useState(false)
 
 
     /* useState для хранения инпутов , попадает все то, что мы пробрасавыем  в пропсах*/
@@ -63,11 +63,9 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
     }
     const isSaveDisabled = Object.values(errors).some(el => el);
 
-    const isDisabledDelete = () => {
-        if (isLoadingForDelete) {
-            setIsDisabled(!isDisabledDelete)
-        }
-    }
+
+
+
 
     const handleCancel = () => {
         setEditable(false);
