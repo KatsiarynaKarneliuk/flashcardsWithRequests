@@ -1,0 +1,127 @@
+import React, { useState } from 'react';
+import BtnAction from '../btnAction';
+import styles from './index.module.css';
+
+
+const Row = ({ english, russian, transcription, id, LoadData }) => {
+
+    const [editable, setEditable] = useState(false);
+    const [isLoadingForDelete, setIsLoadingForDelete] = useState(true);
+
+
+    /* useState для хранения инпутов , попадает все то, что мы пробрасавыем  в пропсах*/
+    const [value, setValue] = useState({
+        english: english,
+        russian: russian,
+        transcription: transcription,
+        id: id
+    });
+
+    const [errors, setErrors] = useState({   /* чтобы перебрать значения свойств О,надо получить доступ к массиву его значений */
+        english: false,
+        russian: false,
+        transcription: false
+    })
+    const handleEdit = () => {
+        setEditable(true);
+    }
+    const handleChangeWord = (e) => {
+        setValue({ ...value, [e.target.name]: e.target.value })
+        setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
+    }
+    const handleSave = () => {
+        if (!/^[a-zA-Z]+$/.test(value.english)) {
+            setErrors({ ...errors, english: "Только английские буквы" })
+        }
+        else if (!/^[а-яА-Я]+$/.test(value.russian)) {
+            setErrors({ ...errors, russian: "Только на кирилице" })
+        } else {
+            setEditable(false);
+            /* updateWord(value); */
+            fetch(`/api/words/${id}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({
+                    english: value.english,
+                    russian: value.russian,
+                    transcription: value.transcription,
+                    tags: []
+                })
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong')
+                    }
+                })
+                .then(LoadData);
+        }
+    }
+    const isSaveDisabled = Object.values(errors).some(el => el);
+
+
+    const handleCancel = () => {
+        setEditable(false);
+    }
+
+    const handleDelete = (id) => {
+        isLoadingForDelete(true)
+        fetch(`/api/words/${id}/delete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong')
+                }
+            })
+            .then(LoadData)
+            .then(
+                setIsLoadingForDelete({ isLoadingForDelete: false }))
+    }
+    return (
+        <React.Fragment>
+            {editable
+                ? (<tr>
+                    <td>{id}</td>
+                    <td>
+                        <input name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
+                        <div className={styles.textError}>{errors.english && errors.english}</div>
+                    </td>
+                    <td>
+                        <input name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
+                        <div >{errors.transcription && errors.transcription}</div>
+                    </td>
+                    <td>
+                        <input name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
+                        <div>{errors.russian && errors.russian} </div>
+                    </td>
+                    <td>
+                        <BtnAction className={styles.btnAction} btnName="save" onClick={handleSave} disabled={isSaveDisabled} />
+                        <BtnAction className={styles.btnAction} btnName="cancel" onClick={handleCancel} />
+                    </td>
+                </tr>)
+                : (<tr>
+                    <td>{id}</td>
+                    <td>{english}</td>
+                    <td>{transcription}</td>
+                    <td>{russian}</td>
+                    <td>
+                        <BtnAction className={styles.btnAction} btnName="edit" onClick={handleEdit} />
+                        <BtnAction className={styles.btnAction} btnName="delete" onClick={() => handleDelete({ id })} disabled={isDisabled} />
+                    </td>
+                </tr>
+                )
+            }
+        </React.Fragment>
+    )
+}
+
+export default Row;

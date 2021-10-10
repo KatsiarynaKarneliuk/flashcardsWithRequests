@@ -1,0 +1,94 @@
+
+.tariff {
+	display: block;
+	position: relative;
+	max-width: 50%;
+	max-height: 100%;
+	background-color: white;
+	border-radius: 4px;
+	padding: 1% 1%; 
+	margin: 1px;
+	text-decoration: none;
+	z-index: 0;
+	overflow: hidden;
+	border: 1px solid #f2f8f9;
+}	
+.tariff:hover {
+	transition: all 0.2s ease-out;
+	box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+	top: -4px;
+	border: 1px solid #cccccc;
+	background-color: white;
+}
+.tariff_selected {
+	display: block;
+	position: relative;
+	max-width: 50%;
+	max-height: 100%;
+	background-color: rgb(138, 197, 236);
+	border-radius: 4px;
+	padding: 1% 1%; 
+	margin: 1px;
+	text-decoration: none;
+	z-index: 0;
+	overflow: hidden;
+	border: 5px solid #f2f8f9;
+}
+
+
+.tariff_header{
+	height: 30%;
+}
+	
+.tariff_text_cost{
+	height: 100px;
+}
+
+.tariff_text_conditions{
+	background-color: #dee2e1;
+	hyphens: auto;
+}
+
+.tariff_header,
+.tariff_text_cost,
+.tariff_text_speed,
+.tariff_text_conditions
+{
+	border: 1px solid white;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+
+p,h2{
+	font-size:400 rem;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	color: #9b9797;
+}
+.tariff:nth-child(1) .tariff_header {
+	background-color: #30d5c8;
+}
+.tariff:nth-child(2) .tariff_header {
+	background-color: #1f8972;
+}
+.tariff:nth-child(3) .tariff_header {
+	background-color: #c4554e;
+}
+.tariff:nth-child(4) .tariff_header {
+	background-color: #282f37;
+}
+
+.tariff:nth-child(1) .tariff_text_cost {
+	background-color: #97d6d1;
+}
+.tariff:nth-child(2) .tariff_text_cost {
+	background-color: #467a6f;
+}
+.tariff:nth-child(3) .tariff_text_cost {
+	background-color: #a37a77;
+}
+.tariff:nth-child(4) .tariff_text_cost {
+	background-color: #373c41;
+}
+
