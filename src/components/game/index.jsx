@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import CardWrapper from '../flashcards/cardWrapper';
 import styles from './index.module.css';
+import { Context } from '../../context';
+
 
 
 const Slider = ({ data }) => {
+    const context = useContext(Context);
     const [position, setPosition] = useState(0);
 
     const showPreviousHandler = () => {
@@ -29,7 +32,7 @@ const Slider = ({ data }) => {
                 onShowNext={showNextHandler}
                 number={position + 1}
                 position={position}
-                data={data}
+                data={context}
                 dataLength={data.length}
             />
         </div>
