@@ -8,7 +8,7 @@ import Slider from './components/game';
 import Tariffs from './components/tarifPage/tarifs';
 import PageNotFound from './components/notFound';
 import photoshop from './components/images/photoshop.png';
-import words from './components/words';
+/* import words from './components/words'; */
 
 
 export default function Nav() {
@@ -36,7 +36,7 @@ export default function Nav() {
                 )} />
                 <Switch>
                     <Route exact path="/flashcards" component={Flashcards} />
-                    <Route exact path="/game" component={() => <Slider data={words} />} />
+                    <Route exact path="/game" component={Slider} />
                     <Route exact path="/tarifPage" component={Tariffs} />
                     <Route exact path="/" component={Table} /> 
                     <Route component={PageNotFound} />                                                                 

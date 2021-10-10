@@ -6,7 +6,7 @@ import LoadedComponent from '../../isLoading';
 import AddNewWord from '../newword';
 
 
-function Table({ isLoading, error }) {
+function Table({ isLoading, error, loadData }) {
     const context = useContext(Context); //в context  должны прийти words из Provider
     const [wordList, setWords] = useState(context);
     const updateWord = (word) => {
@@ -22,7 +22,7 @@ function Table({ isLoading, error }) {
     }
 
     return (
-        <LoadedComponent isLoading={isLoading} error={error}>
+        <LoadedComponent isLoading={isLoading} error={error} loadData={loadData} >
             <div className={styles.wraper}>
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
@@ -48,7 +48,7 @@ function Table({ isLoading, error }) {
                             />
                         )}
 
-                        <AddNewWord refreshData={this.loadData}></AddNewWord>
+                        <AddNewWord refreshData={loadData}></AddNewWord>
                     </tbody>
                 </table>
             </div>

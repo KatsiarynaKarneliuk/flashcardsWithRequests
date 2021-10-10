@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from '/src/App.js';
-import LoadedComponent from '/src/components/isLoading.jsx';
+import Nav from './App.js';
+import LoadedComponent from './components/isLoading';
 
 
 export const Context = React.createContext();
@@ -36,7 +36,7 @@ class Words extends React.Component {
             .catch(error => this.setState({ error: error, isLoading: false }));
     }
     render() {
-        const { words, isLoading, error } = this.state;
+        const { words, isLoading, error, loadData } = this.state;
 
         return (
             <Context.Provider value={words}>
