@@ -1,4 +1,4 @@
-import { React, useState, useContext } from 'react';
+import { React, /* useState, */ useContext } from 'react';
 import styles from './index.module.css';
 import Row from '../row';
 import { Context } from '../../../context';
@@ -8,8 +8,8 @@ import AddNewWord from '../newword';
 
 function Table({ isLoading, error, loadData }) {
     const context = useContext(Context); //в context  должны прийти words из Provider
-    const [wordList, setWords] = useState(context);
-    const updateWord = (word) => {
+    /* const [wordList, setWords] = useState(context);
+        const updateWord = (word) => {
         const new_words = wordList.map(item => {
             if (item.id === word.id) {
                 return word
@@ -19,8 +19,7 @@ function Table({ isLoading, error, loadData }) {
             }
         })
         setWords(new_words)
-    }
-
+    } */
     return (
         <LoadedComponent isLoading={isLoading} error={error} loadData={loadData} >
             <div className={styles.wraper}>
@@ -37,17 +36,15 @@ function Table({ isLoading, error, loadData }) {
                     </thead>
 
                     <tbody className={styles.tbody}>
-                        {wordList.map(word =>
+                        {context.map(word =>
                             <Row
                                 id={word.id}
                                 english={word.english}
                                 transcription={word.transcription}
                                 russian={word.russian}
-                                updateWord={updateWord}
-                            /* refreshData={this.loadData} */
+                                refreshData={loadData}
                             />
                         )}
-
                         <AddNewWord refreshData={loadData}></AddNewWord>
                     </tbody>
                 </table>

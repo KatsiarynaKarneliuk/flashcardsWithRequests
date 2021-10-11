@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 const LoadedComponent = ({ isLoading, error, children }) => {
     if (isLoading) {
         return <p>Loading ...</p>

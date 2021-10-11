@@ -2,6 +2,8 @@ import { React, useState } from 'react'
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
 
+
+
 const AddNewWord = ({ refreshData }) => {
     const [value, setValue] = useState({
         english: '',

@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
 
 
-const Row = ({ english, russian, transcription, id, LoadData }) => {
+const Row = ({ english, russian, transcription, id, refreshData }) => {
 
     const [editable, setEditable] = useState(false);
-    const [isLoadingForDelete, setIsLoadingForDelete] = useState(true);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
-
-    /* useState для хранения инпутов , попадает все то, что мы пробрасавыем  в пропсах*/
     const [value, setValue] = useState({
         english: english,
         russian: russian,
@@ -30,6 +28,7 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
+
     const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
@@ -37,8 +36,8 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            setEditable(false);
-            /* updateWord(value); */
+
+            setIsLoading(isLoading)
             fetch(`/api/words/${id}/update`, {
                 method: 'POST',
                 headers: {
@@ -58,22 +57,19 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
                         throw new Error('Something went wrong')
                     }
                 })
-                .then(LoadData);
+                .then(setIsLoading(false), setEditable(false), refreshData);
+
         }
     }
-    const isSaveDisabled = Object.values(errors).some(el => el);
 
-
-
-
-
+    const isSaveDisabled = Object.values(errors).some(el => el); //как добавить, что также disabled при отправке запроса?
     const handleCancel = () => {
         setEditable(false);
     }
 
-
     const handleDelete = (id) => {
-        isLoadingForDelete(true)
+        setIsLoading(true)
+        setIsDisabledDelete(true)
         fetch(`/api/words/${id}/delete`, {
             method: 'POST',
             headers: {
@@ -87,9 +83,7 @@ const Row = ({ english, russian, transcription, id, LoadData }) => {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(LoadData)
-            .then(
-                setIsLoadingForDelete({ isLoadingForDelete: false }))
+            .then(setIsLoading(false), setIsDisabledDelete(false), refreshData);
     }
     return (
         <React.Fragment>
