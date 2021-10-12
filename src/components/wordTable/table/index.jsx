@@ -9,6 +9,10 @@ import AddNewWord from '../newword';
 function Table({ isLoading, error }) {
     const context = useContext(Context);
     console.log(context)
+    const listWords = context.words
+    console.log(listWords)
+    const refreshData = context.loadData()
+    console.log(refreshData)
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
@@ -25,16 +29,16 @@ function Table({ isLoading, error }) {
                     </thead>
 
                     <tbody className={styles.tbody}>
-                        {context.map(word =>
+                        {/* context.words. */listWords.map(word =>
                             <Row
                                 id={word.id}
                                 english={word.english}
                                 transcription={word.transcription}
                                 russian={word.russian}
-                                refreshData={context.loadData()}
+                                refreshData={word.refreshData}
                             />
                         )}
-                        <AddNewWord refreshData={context.loadData()}></AddNewWord>
+                        <AddNewWord refreshData={refreshData/* context.loadData() */}></AddNewWord>
                     </tbody>
                 </table>
             </div>
