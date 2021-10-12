@@ -6,21 +6,9 @@ import LoadedComponent from '../../isLoading';
 import AddNewWord from '../newword';
 
 
-function Table({ isLoading, error, loadData }) {
-    const context = useContext(Context); //в context  должны прийти words из Provider
+function Table({ isLoading, error }) {
+    const context = useContext(Context);
     console.log(context)
-    /* const [wordList, setWords] = useState(context);
-        const updateWord = (word) => {
-        const new_words = wordList.map(item => {
-            if (item.id === word.id) {
-                return word
-            }
-            else {
-                return item
-            }
-        })
-        setWords(new_words)
-    } */
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
@@ -43,10 +31,10 @@ function Table({ isLoading, error, loadData }) {
                                 english={word.english}
                                 transcription={word.transcription}
                                 russian={word.russian}
-                                refreshData={loadData}
+                                refreshData={context.loadData()}
                             />
                         )}
-                        <AddNewWord refreshData={loadData}></AddNewWord>
+                        <AddNewWord refreshData={context.loadData()}></AddNewWord>
                     </tbody>
                 </table>
             </div>

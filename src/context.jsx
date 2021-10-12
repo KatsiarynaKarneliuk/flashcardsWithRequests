@@ -39,11 +39,11 @@ class Words extends React.Component {
         const { words, isLoading, error } = this.state;
 
         return (
-            <Context.Provider value={words}>
+            <Context.Provider value={{ words: words, loadData: this.LoadData }} >
                 <LoadedComponent isLoading={isLoading} error={error} >
                     <Nav />
                 </LoadedComponent>
-            </Context.Provider>
+            </Context.Provider >
         )
     }
 }
