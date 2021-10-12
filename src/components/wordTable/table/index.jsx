@@ -8,6 +8,7 @@ import AddNewWord from '../newword';
 
 function Table({ isLoading, error, loadData }) {
     const context = useContext(Context); //в context  должны прийти words из Provider
+    console.log(context)
     /* const [wordList, setWords] = useState(context);
         const updateWord = (word) => {
         const new_words = wordList.map(item => {
@@ -21,7 +22,7 @@ function Table({ isLoading, error, loadData }) {
         setWords(new_words)
     } */
     return (
-        <LoadedComponent isLoading={isLoading} error={error} loadData={loadData} >
+        <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
