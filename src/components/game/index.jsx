@@ -17,7 +17,7 @@ const Slider = () => {
     };
 
     const showNextHandler = () => {
-        if (position < context.length - 1) {
+        if (position < listWords.length - 1) {
             setPosition(position + 1);
             console.log(position)
         }
