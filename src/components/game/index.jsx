@@ -7,6 +7,7 @@ import { Context } from '../../context';
 
 const Slider = () => {
     const context = useContext(Context);
+    const listWords = context.words
     const [position, setPosition] = useState(0);
 
     const showPreviousHandler = () => {
@@ -32,8 +33,8 @@ const Slider = () => {
                 onShowNext={showNextHandler}
                 number={position + 1}
                 position={position}
-                context={context}
-                dataLength={context.length}
+                listWords={listWords}
+                dataLength={listWords.length}
             />
         </div>
     )

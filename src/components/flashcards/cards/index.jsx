@@ -7,6 +7,7 @@ import { Context } from '../../../context'
 
 function Flashcards(data) {
     const context = useContext(Context);
+    const listWords = context.words
     const [amountOfChecked, setAmountOfChecked] = useState(0);
     const upAmountOfChecked = () => {
         setAmountOfChecked(amountOfChecked + 1)
@@ -17,7 +18,7 @@ function Flashcards(data) {
         < div >
             <Button className={styles.countBtn} variant="outlined">Просмотрено {amountOfChecked} переводов</Button>
             <div className={styles.flashcards}>
-                {context.map(flashcard => {
+                {listWords.map(flashcard => {
                     return <Flashcard
                         english={flashcard.english}
                         transcription={flashcard.transcription}

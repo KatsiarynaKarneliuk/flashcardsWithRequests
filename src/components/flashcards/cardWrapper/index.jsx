@@ -4,7 +4,7 @@ import styles from './index.module.css';
 import Button from '@mui/material/Button';
 
 
-const CardWrapper = ({ position, onShowPrevious, onShowNext, context, number, dataLength }) => {
+const CardWrapper = ({ position, onShowPrevious, onShowNext, listWords, number, dataLength }) => {
 
 
     return (
@@ -12,9 +12,9 @@ const CardWrapper = ({ position, onShowPrevious, onShowNext, context, number, da
             <div className={styles.aroundCard}>
                 <Button className={styles.countBtn} variant="outlined" onClick={onShowPrevious}>left</Button>
                 <Flashcard
-                    english={context[position].english}
-                    transcription={context[position].transcription}
-                    russian={context[position].russian}
+                    english={listWords[position].english}
+                    transcription={listWords[position].transcription}
+                    russian={listWords[position].russian}
                 />
                 <Button className={styles.countBtn} variant="outlined" onClick={onShowNext}>right</Button>
             </div>
@@ -22,4 +22,4 @@ const CardWrapper = ({ position, onShowPrevious, onShowNext, context, number, da
         </div>
     )
 }
-export default CardWrapper; /* используется в  slider */
+export default CardWrapper;
