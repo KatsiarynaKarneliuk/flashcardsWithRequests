@@ -18,6 +18,7 @@ function Table({ isLoading, error }) {
             <div className={styles.wraper}>
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
+                    <AddNewWord refreshData={refreshData}></AddNewWord>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
                             <td>id</td>
@@ -38,7 +39,6 @@ function Table({ isLoading, error }) {
                                 refreshData={word.refreshData}
                             />
                         )}
-                        <AddNewWord refreshData={refreshData}></AddNewWord>
                     </tbody>
                 </table>
             </div>
