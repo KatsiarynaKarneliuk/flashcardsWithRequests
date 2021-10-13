@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
+import { Context } from '../../../context';
 
 
-const Row = ({ english, russian, transcription, id, refreshData }) => {
+const Row = ({ english, russian, transcription, id }) => {
 
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const context = useContext(Context);
 
     const [value, setValue] = useState({
         english: english,
@@ -57,7 +59,7 @@ const Row = ({ english, russian, transcription, id, refreshData }) => {
                         throw new Error('Something went wrong')
                     }
                 })
-                .then(setIsLoading(false), setEditable(false), refreshData);
+                .then(setIsLoading(false), setEditable(false), context.loadData());
 
         }
     }
@@ -83,7 +85,7 @@ const Row = ({ english, russian, transcription, id, refreshData }) => {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(setIsLoading(false), setIsDisabledDelete(false), refreshData);
+            .then(setIsLoading(false), setIsDisabledDelete(false), context.loadData());
     }
     return (
         <React.Fragment>

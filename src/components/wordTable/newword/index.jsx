@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useContext } from 'react'
 /* import BtnAction from '../btnAction'; */
 import styles from './index.module.css';
 import Button from '@mui/material/Button';
@@ -8,16 +8,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Context } from '../../../context';
 
 
 
-const AddNewWord = ({ refreshData }) => {
+const AddNewWord = () => {
     const [value, setValue] = useState({
         english: '',
         russian: '',
         transcription: '',
     });
-
+    const context = useContext(Context);
     const [errors, setErrors] = useState({   /* чтобы перебрать значения свойств О,надо получить доступ к массиву его значений */
         english: false,
         russian: false,
@@ -59,14 +60,13 @@ const AddNewWord = ({ refreshData }) => {
                     }
                 })
 
-                .then(setIsLoading(false), () => refreshData())
+                .then(setIsLoading(false), context.loadData()/* () => refreshData() */)
                 .then(setValue({
                     english: '',
                     russian: '',
                     transcription: '',
                 }))
         }
-
     }
     const [open, setOpen] = useState(false);
 
