@@ -17,6 +17,7 @@ const AddNewWord = ({ refreshData }) => {
         transcription: false
     })
     const isSaveDisabled = Object.values(errors).some(el => el);
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -30,6 +31,7 @@ const AddNewWord = ({ refreshData }) => {
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
+            setIsLoading(isLoading)
             fetch('/api/words/add', {
                 method: 'POST',
                 headers: {
@@ -49,7 +51,13 @@ const AddNewWord = ({ refreshData }) => {
                         throw new Error('Something went wrong')
                     }
                 })
-                .then(() => refreshData())
+
+                .then(setIsLoading(false), () => refreshData())
+                .then(setValue({
+                    english: '',
+                    russian: '',
+                    transcription: '',
+                }))
         }
     }
     return (
