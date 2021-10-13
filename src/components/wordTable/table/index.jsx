@@ -29,7 +29,7 @@ function Table({ isLoading, error }) {
                     </thead>
 
                     <tbody className={styles.tbody}>
-                        {/* context.words. */listWords.map(word =>
+                        {listWords.map(word =>
                             <Row
                                 id={word.id}
                                 english={word.english}
@@ -38,7 +38,7 @@ function Table({ isLoading, error }) {
                                 refreshData={word.refreshData}
                             />
                         )}
-                        <AddNewWord refreshData={refreshData/* context.loadData() */}></AddNewWord>
+                        <AddNewWord refreshData={refreshData}></AddNewWord>
                     </tbody>
                 </table>
             </div>

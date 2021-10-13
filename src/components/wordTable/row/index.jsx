@@ -89,7 +89,6 @@ const Row = ({ english, russian, transcription, id, refreshData }) => {
         <React.Fragment>
             {editable
                 ? (<tr>
-                    <td>{id}</td>
                     <td>
                         <input name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
                         <div className={styles.textError}>{errors.english && errors.english}</div>
@@ -108,7 +107,6 @@ const Row = ({ english, russian, transcription, id, refreshData }) => {
                     </td>
                 </tr>)
                 : (<tr>
-                    <td>{id}</td>
                     <td>{english}</td>
                     <td>{transcription}</td>
                     <td>{russian}</td>
