@@ -11,7 +11,7 @@ function Table({ isLoading, error }) {
     console.log(context)
     const listWords = context.words
     console.log(listWords)
-    const refreshData = context.loadData()
+    const refreshData = context.loadData
     console.log(refreshData)
     return (
         <LoadedComponent isLoading={isLoading} error={error}>

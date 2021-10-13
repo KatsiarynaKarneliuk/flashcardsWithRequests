@@ -112,7 +112,7 @@ const Row = ({ english, russian, transcription, id, refreshData }) => {
                     <td>{russian}</td>
                     <td>
                         <BtnAction className={styles.btnAction} btnName="edit" onClick={handleEdit} />
-                        <BtnAction className={styles.btnAction} btnName="delete" onClick={() => handleDelete({ id })} disabled={isDisabledDelete} />
+                        <BtnAction className={styles.btnAction} btnName="delete" onClick={() => handleDelete(id)} disabled={isDisabledDelete} />
                     </td>
                 </tr>
                 )
