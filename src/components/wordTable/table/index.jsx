@@ -21,7 +21,6 @@ function Table({ isLoading, error }) {
                     <AddNewWord refreshData={refreshData}></AddNewWord>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
-                            <td>id</td>
                             <td>english</td>
                             <td>transcription</td>
                             <td>russian</td>

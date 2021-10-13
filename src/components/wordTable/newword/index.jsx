@@ -87,7 +87,7 @@ const AddNewWord = ({ refreshData }) => {
                 <DialogTitle>Subscribe</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Введите слово
+                        Введите слово, транскрипцию и перевод
                     </DialogContentText>
                     <TextField name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english}
                         autoFocus
@@ -97,6 +97,7 @@ const AddNewWord = ({ refreshData }) => {
                         type="text"
                         fullWidth
                         variant="standard"
+
                     />
                     <TextField name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription}
                         autoFocus
