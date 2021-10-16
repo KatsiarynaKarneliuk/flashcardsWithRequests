@@ -117,6 +117,7 @@ const AddNewWord = () => {
                 <DialogActions>
                     {/* <Button onClick={handleClose}>Cancel</Button> */}
                     <Button onClick={handleSave} disabled={isSaveDisabled}>Save</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </div >

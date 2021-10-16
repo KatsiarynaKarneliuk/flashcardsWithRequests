@@ -16,9 +16,9 @@ function Table({ isLoading, error }) {
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
+                <AddNewWord refreshData={refreshData}></AddNewWord>
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
-                    <AddNewWord refreshData={refreshData}></AddNewWord>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
                             <td>english</td>
