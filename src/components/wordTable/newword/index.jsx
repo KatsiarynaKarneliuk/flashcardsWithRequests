@@ -60,7 +60,7 @@ const AddNewWord = () => {
                     }
                 })
 
-                .then(setIsLoading(false), context.loadData()/* () => refreshData() */)
+                .then(setIsLoading(false), context.loadData(), handleClose())
                 .then(setValue({
                     english: '',
                     russian: '',
@@ -84,23 +84,20 @@ const AddNewWord = () => {
                 Добавить слово
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>Добавить новое слово</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Введите слово, транскрипцию и перевод
                     </DialogContentText>
                     <TextField name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="english"
                         type="text"
                         fullWidth
                         variant="standard"
-
                     />
                     <TextField name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="transcription"
@@ -109,7 +106,6 @@ const AddNewWord = () => {
                         variant="standard"
                     />
                     <TextField name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="russian"
@@ -119,11 +115,11 @@ const AddNewWord = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    {/* <Button onClick={handleClose}>Cancel</Button> */}
                     <Button onClick={handleSave} disabled={isSaveDisabled}>Save</Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </div >
     );
 }
 
